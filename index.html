@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galvão | Estúdio de Tatuagem</title>
+    <meta name="description" content="Estúdio de tatuagem Galvão - Transformando ideias em arte permanente. Especialista em blackwork, anime e tatuagens personalizadas.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0a0a0a',
+                        light: '#f5f5f5',
+                        accent: '#FFB800',
+                        accent2: '#3a3aff',
+                        gray: {
+                            900: '#0a0a0a',
+                            800: '#1a1a1a',
+                            700: '#2a2a2a',
+                            600: '#3a3a3a',
+                            500: '#5a5a5a',
+                            400: '#7a7a7a',
+                            300: '#9a9a9a',
+                            200: '#bababa',
+                            100: '#dadada',
+                            50: '#f5f5f5',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['Space Mono', 'monospace'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 8s linear infinite',
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(100%)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+    
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- GSAP para animações -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+</head>
+<body class="bg-dark text-light font-sans overflow-x-hidden">
+    <!-- Cursor personalizado -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
+    
+    <!-- Barra de progresso -->
+    <div class="progress-bar fixed top-0 left-0 h-1 bg-accent z-50 transition-all duration-300"></div>
+    
+    <!-- Loader -->
+    <div id="loader" class="fixed inset-0 bg-dark z-[9999] flex items-center justify-center">
+        <div class="loader-content text-center">
+            <div class="text-6xl md:text-8xl font-bold mb-8 tracking-tighter">
+                <span class="loader-letter inline-block text-accent">G</span>
+                <span class="loader-letter inline-block">ALVÃO</span>
+            </div>
+            <div class="w-64 h-1 bg-gray-700 relative overflow-hidden mx-auto">
+                <div class="loader-bar absolute top-0 left-0 h-full bg-accent"></div>
+            </div>
+            <p class="text-gray-400 mt-4 text-sm uppercase tracking-widest">Carregando...</p>
+        </div>
+    </div>
+    
+    <!-- Navegação -->
+    <nav class="fixed w-full z-40 transition-all duration-500" id="navbar">
+        <div class="container mx-auto px-6 py-6">
+            <div class="flex items-center justify-between">
+                <a href="#home" class="text-2xl font-bold tracking-tighter nav-logo flex items-center">
+                    <span class="text-accent">GALVÃO</span>
+                </a>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link relative overflow-hidden">INÍCIO</a>
+                    <a href="#about" class="nav-link relative overflow-hidden">SOBRE</a>
+                    <a href="#work" class="nav-link relative overflow-hidden">TRABALHOS</a>
+                    <a href="#process" class="nav-link relative overflow-hidden">PROCESSO</a>
+                    <a href="#contact" class="nav-link relative overflow-hidden">CONTATO</a>
+                </div>
+                
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="menu-button w-10 h-10 relative focus:outline-none">
+                        <span class="menu-line absolute h-0.5 w-8 bg-white transition-all duration-300"></span>
+                        <span class="menu-line absolute h-0.5 w-8 bg-white transition-all duration-300"></span>
+                        <span class="menu-line absolute h-0.5 w-8 bg-white transition-all duration-300"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Menu Mobile -->
+    <div id="mobile-menu" class="fixed inset-0 bg-dark z-30 flex flex-col justify-center items-center transform translate-x-full transition-transform duration-700 ease-in-out">
+        <div class="container mx-auto px-6 py-4 flex flex-col space-y-8 text-center">
+            <a href="#home" class="mobile-link text-4xl font-bold hover:text-accent transition-colors duration-300">INÍCIO</a>
+            <a href="#about" class="mobile-link text-4xl font-bold hover:text-accent transition-colors duration-300">SOBRE</a>
+            <a href="#work" class="mobile-link text-4xl font-bold hover:text-accent transition-colors duration-300">TRABALHOS</a>
+            <a href="#process" class="mobile-link text-4xl font-bold hover:text-accent transition-colors duration-300">PROCESSO</a>
+            <a href="#contact" class="mobile-link text-4xl font-bold hover:text-accent transition-colors duration-300">CONTATO</a>
+        </div>
+        
+        <div class="absolute bottom-10 left-0 w-full text-center">
+            <div class="flex justify-center space-x-6">
+                <a href="https://instagram.com/galvaorv" target="_blank" class="text-gray-400 hover:text-accent transition-colors duration-300">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+                <a href="https://wa.me/5511999999999" target="_blank" class="text-gray-400 hover:text-accent transition-colors duration-300">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seção Hero -->
+    <section id="home" class="h-screen relative overflow-hidden">
+        <div class="noise-overlay absolute inset-0 opacity-30 mix-blend-overlay"></div>
+        
+        <!-- Background com imagem -->
+        <div class="absolute inset-0">
+            <img src="images/hero-bg-v2.jpg" alt="Tattoo Background" class="w-full h-full object-cover opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-dark/70 to-gray-800/90"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent"></div>
+        </div>
+        
+        <!-- Elementos decorativos -->
+        <div class="absolute top-20 right-20 w-32 h-32 border border-accent opacity-20 rotate-45 animate-spin-slow hidden md:block"></div>
+        <div class="absolute bottom-20 left-20 w-24 h-24 bg-accent opacity-10 rounded-full animate-pulse-slow hidden md:block"></div>
+        
+        <div class="container mx-auto px-6 h-full flex flex-col justify-center items-center relative z-10">
+            <div class="text-center max-w-5xl mx-auto">
+                <h1 class="hero-title text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tighter leading-none font-serif">
+                    <span class="block overflow-hidden">
+                        <span class="block transform translate-y-full opacity-0">ARTE NA</span>
+                    </span>
+                    <span class="block overflow-hidden">
+                        <span class="block transform translate-y-full opacity-0">SUA <span class="text-accent">PELE</span></span>
+                    </span>
+                </h1>
+                
+                <p class="hero-subtitle text-lg md:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto overflow-hidden">
+                    <span class="block transform translate-y-full opacity-0">Estúdio de tatuagem Galvão - Transformando ideias em arte permanente com técnicas avançadas em blackwork, anime e designs exclusivos</span>
+                </p>
+                
+                <div class="hero-cta overflow-hidden">
+                    <div class="transform translate-y-full opacity-0 flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="#contact" class="btn-primary inline-block px-8 py-4 border-2 border-accent text-accent hover:bg-accent hover:text-dark transition-all duration-300 uppercase tracking-wider text-sm font-bold relative overflow-hidden">
+                            <span class="relative z-10">Agendar Sessão</span>
+                        </a>
+                        <a href="#work" class="btn-secondary inline-block px-8 py-4 bg-accent text-dark hover:bg-white hover:text-dark transition-all duration-300 uppercase tracking-wider text-sm font-bold relative overflow-hidden">
+                            <span class="relative z-10">Ver Trabalhos</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <div class="scroll-indicator flex flex-col items-center">
+                    <span class="text-xs uppercase tracking-widest mb-2 opacity-60">Scroll</span>
+                    <div class="w-px h-8 bg-white relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-2 bg-accent animate-pulse"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Sobre -->
+    <section id="about" class="py-16 md:py-24 bg-dark relative overflow-hidden">
+        <div class="noise-overlay absolute inset-0 opacity-10 mix-blend-overlay"></div>
+        
+        <!-- Gradientes sutis para quebrar o preto -->
+        <div class="absolute inset-0 bg-gradient-to-br from-gray-900/50 via-transparent to-gray-800/30"></div>
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-accent/5 via-transparent to-transparent"></div>
+        <div class="absolute bottom-0 left-0 w-1/3 h-1/2 bg-gradient-to-tr from-accent/3 via-transparent to-transparent"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="relative order-2 lg:order-1">
+                    <div class="about-image-container relative">
+                        <div class="about-image w-full h-80 md:h-96 lg:h-[500px] bg-gray-800 relative overflow-hidden rounded-lg shadow-2xl">
+                            <!-- Foto real do Galvão -->
+                            <img src="images/galvao_photo.jpg" alt="Galvão - Tatuador Profissional" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent"></div>
+                        </div>
+                        
+                        <!-- Elementos decorativos -->
+                        <div class="about-border absolute -bottom-4 -right-4 w-full h-full border-2 border-accent/30 rounded-lg -z-10"></div>
+                        
+                        <!-- Badge de experiência -->
+                        <div class="absolute top-4 right-4 bg-accent text-dark px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+                            8+ Anos
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-1 lg:order-2">
+                    <div class="section-header mb-6">
+                        <div class="transform translate-y-full opacity-0">
+                            <span class="inline-block text-accent uppercase tracking-widest text-sm font-semibold mb-3">Sobre o Artista</span>
+                            <h2 class="text-4xl md:text-5xl font-bold tracking-tighter leading-tight font-serif mb-3">
+                                Galvão
+                            </h2>
+                            <p class="text-lg text-gray-300 font-light">Transformando pele em arte desde 2016</p>
+                        </div>
+                    </div>
+                    
+                    <div class="about-text space-y-4">
+                        <div class="about-paragraph">
+                            <p class="block transform translate-y-full opacity-0 text-gray-300 leading-relaxed">
+                                Com mais de 8 anos de experiência no mundo da tatuagem, Galvão se estabeleceu como um dos tatuadores mais respeitados da região. Sua jornada começou com uma paixão pela arte visual e evoluiu para uma dedicação completa à criação de obras permanentes.
+                            </p>
+                        </div>
+                        
+                        <div class="about-paragraph">
+                            <p class="block transform translate-y-full opacity-0 text-gray-300 leading-relaxed">
+                                Especializado em <strong class="text-accent">blackwork detalhado</strong>, <strong class="text-accent">tatuagens de anime</strong> e <strong class="text-accent">designs personalizados</strong>, cada projeto é desenvolvido em colaboração com o cliente para garantir resultados únicos e significativos.
+                            </p>
+                        </div>
+                        
+                        <!-- Especialidades -->
+                        <div class="about-specialties mt-6">
+                            <div class="transform translate-y-full opacity-0">
+                                <h4 class="text-accent font-semibold mb-4 uppercase tracking-wider text-sm">Especialidades</h4>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-2 h-2 bg-accent rounded-full"></div>
+                                        <span class="text-gray-300 text-sm">Blackwork</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-2 h-2 bg-accent rounded-full"></div>
+                                        <span class="text-gray-300 text-sm">Anime</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-2 h-2 bg-accent rounded-full"></div>
+                                        <span class="text-gray-300 text-sm">Realismo</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-2 h-2 bg-accent rounded-full"></div>
+                                        <span class="text-gray-300 text-sm">Personalizados</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="about-signature mt-6">
+                            <div class="transform translate-y-full opacity-0">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-px bg-accent"></div>
+                                    <span class="text-accent font-serif text-xl">Galvão</span>
+                                </div>
+                                <p class="text-sm text-gray-400 mt-1">Tatuador Profissional</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Estatísticas -->
+                    <div class="about-stats grid grid-cols-3 gap-6 mt-8">
+                        <div class="text-center">
+                            <div class="transform translate-y-full opacity-0">
+                                <div class="text-2xl md:text-3xl font-bold text-accent mb-1">750+</div>
+                                <div class="text-xs text-gray-400 uppercase tracking-wider">Tatuagens</div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="transform translate-y-full opacity-0">
+                                <div class="text-2xl md:text-3xl font-bold text-accent mb-1">8+</div>
+                                <div class="text-xs text-gray-400 uppercase tracking-wider">Anos</div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="transform translate-y-full opacity-0">
+                                <div class="text-2xl md:text-3xl font-bold text-accent mb-1">100%</div>
+                                <div class="text-xs text-gray-400 uppercase tracking-wider">Satisfação</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Seção Trabalhos -->
+    <section id="work" class="py-20 md:py-32 bg-gray-900 relative overflow-hidden">
+        <div class="noise-overlay absolute inset-0 opacity-10 mix-blend-overlay"></div>
+        
+        <!-- Gradientes sutis para quebrar o preto -->
+        <div class="absolute inset-0 bg-gradient-to-tl from-gray-800/40 via-transparent to-gray-700/20"></div>
+        <div class="absolute bottom-0 right-0 w-2/3 h-1/2 bg-gradient-to-tl from-accent/4 via-transparent to-transparent"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="section-header text-center mb-16 overflow-hidden">
+                <div class="transform translate-y-full opacity-0">
+                    <span class="inline-block text-accent uppercase tracking-widest text-sm font-semibold mb-4">Portfólio</span>
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter leading-tight font-serif mb-6">Nossos Trabalhos</h2>
+                    <p class="text-gray-300 max-w-2xl mx-auto">Cada tatuagem é uma obra de arte única, criada com paixão e dedicação para contar sua história.</p>
+                </div>
+            </div>
+            
+            <div class="work-filter-container text-center mb-12 overflow-hidden">
+                <div class="transform translate-y-full opacity-0">
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button class="work-filter-btn active px-6 py-3 border border-gray-600 hover:border-accent hover:text-accent transition-all duration-300 uppercase tracking-wider text-sm font-semibold">Todos</button>
+                        <button class="work-filter-btn px-6 py-3 border border-gray-600 hover:border-accent hover:text-accent transition-all duration-300 uppercase tracking-wider text-sm font-semibold">Anime</button>
+                        <button class="work-filter-btn px-6 py-3 border border-gray-600 hover:border-accent hover:text-accent transition-all duration-300 uppercase tracking-wider text-sm font-semibold">Blackwork</button>
+                        <button class="work-filter-btn px-6 py-3 border border-gray-600 hover:border-accent hover:text-accent transition-all duration-300 uppercase tracking-wider text-sm font-semibold">Realismo</button>
+                        <button class="work-filter-btn px-6 py-3 border border-gray-600 hover:border-accent hover:text-accent transition-all duration-300 uppercase tracking-wider text-sm font-semibold">Diversos</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="work-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Item 1 - Blackwork -->
+                <div class="work-item group cursor-pointer" data-category="blackwork">
+                    <div class="overflow-hidden transform translate-y-full opacity-0">
+                        <div class="aspect-square bg-gray-800 relative overflow-hidden rounded-lg">
+                            <img src="images/blackwork_1.jpg" alt="Blackwork Tattoo" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="absolute bottom-4 left-4 right-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                                <h3 class="text-white font-semibold mb-1">Blackwork Detalhado</h3>
+                                <p class="text-gray-300 text-sm">Arte em tinta preta com detalhes complexos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 2 - Anime -->
+                <div class="work-item group cursor-pointer" data-category="anime">
+                    <div class="overflow-hidden transform translate-y-full opacity-0">
+                        <div class="aspect-square bg-gray-800 relative overflow-hidden rounded-lg">
+                            <img src="images/anime_1.png" alt="Anime Tattoo" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="absolute bottom-4 left-4 right-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                                <h3 class="text-white font-semibold mb-1">Tatuagens de Anime</h3>
+                                <p class="text-gray-300 text-sm">Personagens favoritos em sua pele</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 3 - Realismo -->
+                <div class="work-item group cursor-pointer" data-category="realismo">
+                    <div class="overflow-hidden transform translate-y-full opacity-0">
+                        <div class="aspect-square bg-gray-800 relative overflow-hidden rounded-lg">
+                            <img src="images/realismo_1.jpg" alt="Realistic Portrait Tattoo" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="absolute bottom-4 left-4 right-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                                <h3 class="text-white font-semibold mb-1">Retrato Realista</h3>
+                                <p class="text-gray-300 text-sm">Técnica fotorrealista em preto e cinza</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 4 - Blackwork 2 -->
+                <div class="work-item group cursor-pointer" data-category="blackwork">
+                    <div class="overflow-hidden transform translate-y-full opacity-0">
+                        <div class="aspect-square bg-gray-800 relative overflow-hidden rounded-lg">
+                            <img src="images/blackwork_2.jpg" alt="Blackwork Geometric" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="absolute bottom-4 left-4 right-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                                <h3 class="text-white font-semibold mb-1">Blackwork Geométrico</h3>
+                                <p class="text-gray-300 text-sm">Padrões geométricos em blackwork</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 5 - Anime 2 -->
+                <div class="work-item group cursor-pointer" data-category="anime">
+                    <div class="overflow-hidden transform translate-y-full opacity-0">
+                        <div class="aspect-square bg-gray-800 relative overflow-hidden rounded-lg">
+                            <img src="images/anime_2.jpg" alt="Anime Character Tattoo" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="absolute bottom-4 left-4 right-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                                <h3 class="text-white font-semibold mb-1">Personagem de Anime</h3>
+                                <p class="text-gray-300 text-sm">Arte detalhada de personagens</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 6 - Geométrico -->
+                <div class="work-item group cursor-pointer" data-category="diversos">
+                    <div class="overflow-hidden transform translate-y-full opacity-0">
+                        <div class="aspect-square bg-gray-800 relative overflow-hidden rounded-lg">
+                            <img src="images/geometrico_1.jpg" alt="Geometric Tattoo" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="absolute bottom-4 left-4 right-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                                <h3 class="text-white font-semibold mb-1">Arte Geométrica</h3>
+                                <p class="text-gray-300 text-sm">Formas precisas e simétricas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 7 - Blackwork 3 -->
+                <div class="work-item group cursor-pointer" data-category="blackwork">
+                    <div class="overflow-hidden transform translate-y-full opacity-0">
+                        <div class="aspect-square bg-gray-800 relative overflow-hidden rounded-lg">
+                            <img src="images/blackwork_3.jpg" alt="Bold Blackwork" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="absolute bottom-4 left-4 right-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                                <h3 class="text-white font-semibold mb-1">Blackwork Ousado</h3>
+                                <p class="text-gray-300 text-sm">Designs marcantes e impactantes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 8 - Realismo 2 -->
+                <div class="work-item group cursor-pointer" data-category="realismo">
+                    <div class="overflow-hidden transform translate-y-full opacity-0">
+                        <div class="aspect-square bg-gray-800 relative overflow-hidden rounded-lg">
+                            <img src="images/realismo_2.jpg" alt="Realistic Fighter Tattoo" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="absolute bottom-4 left-4 right-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                                <h3 class="text-white font-semibold mb-1">Retrato Masculino</h3>
+                                <p class="text-gray-300 text-sm">Realismo com detalhes impressionantes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 9 - Anime 3 -->
+                <div class="work-item group cursor-pointer" data-category="anime">
+                    <div class="overflow-hidden transform translate-y-full opacity-0">
+                        <div class="aspect-square bg-gray-800 relative overflow-hidden rounded-lg">
+                            <img src="images/anime_3.jpg" alt="Anime Sleeve" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="absolute bottom-4 left-4 right-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                                <h3 class="text-white font-semibold mb-1">Sleeve de Anime</h3>
+                                <p class="text-gray-300 text-sm">Composições completas temáticas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 10 - Geométrico 2 -->
+                <div class="work-item group cursor-pointer" data-category="diversos">
+                    <div class="overflow-hidden transform translate-y-full opacity-0">
+                        <div class="aspect-square bg-gray-800 relative overflow-hidden rounded-lg">
+                            <img src="images/geometrico_2.jpg" alt="Geometric Sleeve" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="absolute bottom-4 left-4 right-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                                <h3 class="text-white font-semibold mb-1">Sleeve Geométrica</h3>
+                                <p class="text-gray-300 text-sm">Padrões complexos e mandala</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 11 - Realismo 3 -->
+                <div class="work-item group cursor-pointer" data-category="realismo">
+                    <div class="overflow-hidden transform translate-y-full opacity-0">
+                        <div class="aspect-square bg-gray-800 relative overflow-hidden rounded-lg">
+                            <img src="images/realismo_3.jpg" alt="Realistic Portrait" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="absolute bottom-4 left-4 right-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                                <h3 class="text-white font-semibold mb-1">Retrato Feminino</h3>
+                                <p class="text-gray-300 text-sm">Técnica realista com sombreamento</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 12 - Geométrico 3 -->
+                <div class="work-item group cursor-pointer" data-category="diversos">
+                    <div class="overflow-hidden transform translate-y-full opacity-0">
+                        <div class="aspect-square bg-gray-800 relative overflow-hidden rounded-lg">
+                            <img src="images/geometrico_3.jpg" alt="Modern Geometric" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="absolute bottom-4 left-4 right-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                                <h3 class="text-white font-semibold mb-1">Geométrico Moderno</h3>
+                                <p class="text-gray-300 text-sm">Linhas limpas e formas abstratas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="work-more-btn text-center mt-16 overflow-hidden">
+                <div class="transform translate-y-full opacity-0">
+                    <a href="#contact" class="inline-block px-8 py-4 border-2 border-accent text-accent hover:bg-accent hover:text-dark transition-all duration-300 uppercase tracking-wider text-sm font-bold">
+                        Ver Mais Trabalhos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Processo -->
+    <section id="process" class="py-20 md:py-32 bg-dark relative overflow-hidden">
+        <div class="noise-overlay absolute inset-0 opacity-10 mix-blend-overlay"></div>
+        
+        <!-- Gradientes sutis para quebrar o preto -->
+        <div class="absolute inset-0 bg-gradient-to-tr from-gray-900/60 via-transparent to-gray-800/40"></div>
+        <div class="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-accent/3 via-transparent to-transparent"></div>
+        <div class="absolute bottom-0 right-0 w-1/3 h-2/3 bg-gradient-to-tl from-accent/5 via-transparent to-transparent"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="section-header text-center mb-20 overflow-hidden">
+                <div class="transform translate-y-full opacity-0">
+                    <span class="inline-block text-accent uppercase tracking-widest text-sm font-semibold mb-4">Como Funciona</span>
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter leading-tight font-serif mb-6">Nosso Processo</h2>
+                    <p class="text-gray-300 max-w-2xl mx-auto">Do primeiro contato até o cuidado pós-tatuagem, cada etapa é pensada para garantir a melhor experiência.</p>
+                </div>
+            </div>
+            
+            <div class="process-steps space-y-20">
+                <!-- Etapa 1 -->
+                <div class="process-step flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2 process-step-content">
+                        <div class="overflow-hidden">
+                            <div class="transform translate-y-full opacity-0">
+                                <div class="flex items-center mb-6">
+                                    <div class="process-step-icon w-16 h-16 bg-accent text-dark rounded-full flex items-center justify-center mr-6">
+                                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-2xl font-bold mb-2">01. Consulta</h3>
+                                        <p class="text-accent font-semibold">Primeira Conversa</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-300 leading-relaxed">
+                                    Conversamos sobre sua ideia, discutimos o design, tamanho, localização e estilo. É o momento de alinhar expectativas e criar um conceito único para sua tatuagem.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2 process-step-image">
+                        <div class="overflow-hidden">
+                            <div class="transform translate-y-full opacity-0">
+                                <div class="relative h-80 bg-gray-800 rounded-lg overflow-hidden">
+                                    <img src="images/processo_consulta.jpg" alt="Consulta de Tatuagem" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Etapa 2 -->
+                <div class="process-step flex flex-col md:flex-row-reverse items-center gap-12">
+                    <div class="md:w-1/2 process-step-content">
+                        <div class="overflow-hidden">
+                            <div class="transform translate-y-full opacity-0">
+                                <div class="flex items-center mb-6">
+                                    <div class="process-step-icon w-16 h-16 bg-accent text-dark rounded-full flex items-center justify-center mr-6">
+                                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-2xl font-bold mb-2">02. Design</h3>
+                                        <p class="text-accent font-semibold">Criação Personalizada</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-300 leading-relaxed">
+                                    Desenvolvimento do design exclusivo baseado em suas preferências. Criamos esboços detalhados e refinamos até chegar ao resultado perfeito.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2 process-step-image">
+                        <div class="overflow-hidden">
+                            <div class="transform translate-y-full opacity-0">
+                                <div class="relative h-80 bg-gray-800 rounded-lg overflow-hidden">
+                                    <img src="images/processo_design.jpg" alt="Criação de Design" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-transparent"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Etapa 3 -->
+                <div class="process-step flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2 process-step-content">
+                        <div class="overflow-hidden">
+                            <div class="transform translate-y-full opacity-0">
+                                <div class="flex items-center mb-6">
+                                    <div class="process-step-icon w-16 h-16 bg-accent text-dark rounded-full flex items-center justify-center mr-6">
+                                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.5 6L12 10.5 8.5 8 12 5.5 15.5 8zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-2xl font-bold mb-2">03. Sessão</h3>
+                                        <p class="text-accent font-semibold">Execução da Arte</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-300 leading-relaxed">
+                                    O momento da execução em ambiente totalmente esterilizado, com equipamentos de última geração e técnicas avançadas para garantir o melhor resultado.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2 process-step-image">
+                        <div class="overflow-hidden">
+                            <div class="transform translate-y-full opacity-0">
+                                <div class="relative h-80 bg-gray-800 rounded-lg overflow-hidden">
+                                    <img src="images/processo_execucao.jpg" alt="Sessão de Tatuagem" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 bg-gradient-to-br from-red-500/20 to-transparent"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Etapa 4 -->
+                <div class="process-step flex flex-col md:flex-row-reverse items-center gap-12">
+                    <div class="md:w-1/2 process-step-content">
+                        <div class="overflow-hidden">
+                            <div class="transform translate-y-full opacity-0">
+                                <div class="flex items-center mb-6">
+                                    <div class="process-step-icon w-16 h-16 bg-accent text-dark rounded-full flex items-center justify-center mr-6">
+                                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-2xl font-bold mb-2">04. Cuidados</h3>
+                                        <p class="text-accent font-semibold">Pós-Tatuagem</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-300 leading-relaxed">
+                                    Orientações completas para o cuidado da sua nova tatuagem, garantindo a cicatrização perfeita e a preservação das cores e detalhes.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2 process-step-image">
+                        <div class="overflow-hidden">
+                            <div class="transform translate-y-full opacity-0">
+                                <div class="relative h-80 bg-gray-800 rounded-lg overflow-hidden">
+                                    <img src="images/cuidados_pos_tatuagem.jpg" alt="Cuidados Pós-Tatuagem" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 bg-gradient-to-br from-green-500/20 to-transparent"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Depoimentos -->
+    <section class="py-20 md:py-32 bg-gray-900 relative">
+        <div class="noise-overlay absolute inset-0 opacity-10 mix-blend-overlay"></div>
+        
+        <!-- Elementos decorativos -->
+        <div class="absolute top-10 left-10 w-20 h-20 opacity-20">
+            <img src="images/tattoo_machine_sticker.jpg" alt="Tattoo Machine" class="w-full h-full object-contain filter invert">
+        </div>
+        <div class="absolute bottom-10 right-10 w-16 h-16 opacity-15">
+            <img src="images/tattoo_equipment_sticker.jpg" alt="Tattoo Equipment" class="w-full h-full object-contain filter invert">
+        </div>
+        
+        <div class="container mx-auto px-6">
+            <div class="section-header text-center mb-16 overflow-hidden">
+                <div class="transform translate-y-full opacity-0">
+                    <span class="inline-block text-accent uppercase tracking-widest text-sm font-semibold mb-4">Depoimentos</span>
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter leading-tight font-serif mb-6">O Que Dizem</h2>
+                    <p class="text-gray-300 max-w-2xl mx-auto">A satisfação dos nossos clientes é nossa maior recompensa.</p>
+                </div>
+            </div>
+            
+            <div class="testimonial-slider relative">
+                <div class="testimonial-track flex gap-8 overflow-hidden">
+                    <!-- Depoimento 1 -->
+                    <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3">
+                        <div class="testimonial-content bg-gray-800 p-8 rounded-lg h-full">
+                            <div class="mb-6">
+                                <svg class="w-8 h-8 text-accent mb-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+                                </svg>
+                                <p class="text-gray-300 leading-relaxed">
+                                    "Experiência incrível! O Galvão é um verdadeiro artista. Minha tatuagem ficou exatamente como eu imaginava, com detalhes perfeitos."
+                                </p>
+                            </div>
+                            <div class="testimonial-author flex items-center">
+                                <div class="w-12 h-12 bg-gray-700 rounded-full mr-4 flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Maria Silva</h4>
+                                    <p class="text-sm text-gray-400">Cliente desde 2022</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Depoimento 2 -->
+                    <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3">
+                        <div class="testimonial-content bg-gray-800 p-8 rounded-lg h-full">
+                            <div class="mb-6">
+                                <svg class="w-8 h-8 text-accent mb-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+                                </svg>
+                                <p class="text-gray-300 leading-relaxed">
+                                    "Profissionalismo exemplar! Ambiente limpo, equipamentos modernos e um atendimento excepcional. Recomendo de olhos fechados!"
+                                </p>
+                            </div>
+                            <div class="testimonial-author flex items-center">
+                                <div class="w-12 h-12 bg-gray-700 rounded-full mr-4 flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">João Santos</h4>
+                                    <p class="text-sm text-gray-400">Cliente desde 2021</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Depoimento 3 -->
+                    <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3">
+                        <div class="testimonial-content bg-gray-800 p-8 rounded-lg h-full">
+                            <div class="mb-6">
+                                <svg class="w-8 h-8 text-accent mb-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+                                </svg>
+                                <p class="text-gray-300 leading-relaxed">
+                                    "Já fiz várias tatuagens, mas nunca tive uma experiência tão boa. O cuidado com cada detalhe é impressionante!"
+                                </p>
+                            </div>
+                            <div class="testimonial-author flex items-center">
+                                <div class="w-12 h-12 bg-gray-700 rounded-full mr-4 flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Ana Costa</h4>
+                                    <p class="text-sm text-gray-400">Cliente desde 2023</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Navegação do slider -->
+                <div class="flex justify-center mt-8 space-x-2">
+                    <button class="testimonial-dot w-3 h-3 bg-gray-600 rounded-full transition-colors duration-300 active"></button>
+                    <button class="testimonial-dot w-3 h-3 bg-gray-600 rounded-full transition-colors duration-300"></button>
+                    <button class="testimonial-dot w-3 h-3 bg-gray-600 rounded-full transition-colors duration-300"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção FAQ -->
+    <section class="py-20 md:py-32 bg-dark relative overflow-hidden">
+        <div class="noise-overlay absolute inset-0 opacity-10 mix-blend-overlay"></div>
+        
+        <!-- Gradientes sutis para quebrar o preto -->
+        <div class="absolute inset-0 bg-gradient-to-bl from-gray-800/50 via-transparent to-gray-900/30"></div>
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-accent/4 via-transparent to-transparent"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="section-header text-center mb-16 overflow-hidden">
+                <div class="transform translate-y-full opacity-0">
+                    <span class="inline-block text-accent uppercase tracking-widest text-sm font-semibold mb-4">FAQ</span>
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter leading-tight font-serif mb-6">Perguntas Frequentes</h2>
+                    <p class="text-gray-300 max-w-2xl mx-auto">Tire suas dúvidas sobre o processo de tatuagem e nossos serviços.</p>
+                </div>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="faq-list space-y-4">
+                    <!-- FAQ Item 1 -->
+                    <div class="faq-item border border-gray-700 rounded-lg overflow-hidden">
+                        <button class="faq-question w-full text-left p-6 hover:bg-gray-800 transition-colors duration-300 flex items-center justify-between">
+                            <span class="font-semibold">Quanto tempo demora para fazer uma tatuagem?</span>
+                            <div class="faq-icon relative w-6 h-6">
+                                <div class="absolute top-1/2 left-1/2 w-4 h-px bg-white transform -translate-x-1/2 -translate-y-1/2"></div>
+                                <div class="faq-vertical-line absolute top-1/2 left-1/2 w-px h-4 bg-white transform -translate-x-1/2 -translate-y-1/2 transition-transform duration-300"></div>
+                            </div>
+                        </button>
+                        <div class="faq-answer bg-gray-800">
+                            <div class="p-6 text-gray-300">
+                                O tempo varia conforme o tamanho e complexidade do design. Tatuagens pequenas podem levar de 1-2 horas, enquanto peças maiores podem precisar de múltiplas sessões de 4-6 horas cada.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 2 -->
+                    <div class="faq-item border border-gray-700 rounded-lg overflow-hidden">
+                        <button class="faq-question w-full text-left p-6 hover:bg-gray-800 transition-colors duration-300 flex items-center justify-between">
+                            <span class="font-semibold">Como é o processo de cicatrização?</span>
+                            <div class="faq-icon relative w-6 h-6">
+                                <div class="absolute top-1/2 left-1/2 w-4 h-px bg-white transform -translate-x-1/2 -translate-y-1/2"></div>
+                                <div class="faq-vertical-line absolute top-1/2 left-1/2 w-px h-4 bg-white transform -translate-x-1/2 -translate-y-1/2 transition-transform duration-300"></div>
+                            </div>
+                        </button>
+                        <div class="faq-answer bg-gray-800">
+                            <div class="p-6 text-gray-300">
+                                A cicatrização completa leva cerca de 2-4 semanas. Fornecemos instruções detalhadas de cuidados e acompanhamos todo o processo para garantir a melhor recuperação.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 3 -->
+                    <div class="faq-item border border-gray-700 rounded-lg overflow-hidden">
+                        <button class="faq-question w-full text-left p-6 hover:bg-gray-800 transition-colors duration-300 flex items-center justify-between">
+                            <span class="font-semibold">Vocês fazem orçamentos personalizados?</span>
+                            <div class="faq-icon relative w-6 h-6">
+                                <div class="absolute top-1/2 left-1/2 w-4 h-px bg-white transform -translate-x-1/2 -translate-y-1/2"></div>
+                                <div class="faq-vertical-line absolute top-1/2 left-1/2 w-px h-4 bg-white transform -translate-x-1/2 -translate-y-1/2 transition-transform duration-300"></div>
+                            </div>
+                        </button>
+                        <div class="faq-answer bg-gray-800">
+                            <div class="p-6 text-gray-300">
+                                Sim! Cada tatuagem é única e o orçamento é feito individualmente baseado no tamanho, complexidade, localização e tempo estimado de execução.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 4 -->
+                    <div class="faq-item border border-gray-700 rounded-lg overflow-hidden">
+                        <button class="faq-question w-full text-left p-6 hover:bg-gray-800 transition-colors duration-300 flex items-center justify-between">
+                            <span class="font-semibold">É possível fazer retoques?</span>
+                            <div class="faq-icon relative w-6 h-6">
+                                <div class="absolute top-1/2 left-1/2 w-4 h-px bg-white transform -translate-x-1/2 -translate-y-1/2"></div>
+                                <div class="faq-vertical-line absolute top-1/2 left-1/2 w-px h-4 bg-white transform -translate-x-1/2 -translate-y-1/2 transition-transform duration-300"></div>
+                            </div>
+                        </button>
+                        <div class="faq-answer bg-gray-800">
+                            <div class="p-6 text-gray-300">
+                                Oferecemos retoque gratuito dentro de 6 meses após a cicatrização completa, caso seja necessário algum ajuste na tatuagem original.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Contato -->
+    <section id="contact" class="py-20 md:py-32 bg-gray-900 relative">
+        <div class="noise-overlay absolute inset-0 opacity-10 mix-blend-overlay"></div>
+        
+        <!-- Elementos decorativos -->
+        <div class="absolute top-20 right-20 w-24 h-24 opacity-10">
+            <img src="images/tattoo_machine_sticker.jpg" alt="Tattoo Machine" class="w-full h-full object-contain filter invert animate-pulse">
+        </div>
+        <div class="absolute bottom-20 left-20 w-20 h-20 opacity-15">
+            <img src="images/tattoo_equipment_sticker.jpg" alt="Tattoo Equipment" class="w-full h-full object-contain filter invert animate-pulse delay-1000">
+        </div>
+        
+        <div class="container mx-auto px-6">
+            <div class="section-header text-center mb-16 overflow-hidden">
+                <div class="transform translate-y-full opacity-0">
+                    <span class="inline-block text-accent uppercase tracking-widest text-sm font-semibold mb-4">Contato</span>
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter leading-tight font-serif mb-6">Vamos Conversar</h2>
+                    <p class="text-gray-300 max-w-2xl mx-auto">Entre em contato para agendar sua consulta ou tirar suas dúvidas.</p>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-16">
+                <!-- Informações de contato -->
+                <div class="contact-info">
+                    <div class="space-y-8">
+                        <div class="contact-item overflow-hidden">
+                            <div class="transform translate-y-full opacity-0 flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-accent text-dark rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Endereço</h3>
+                                    <p class="text-gray-300">Rua das Artes, 123<br>Centro, São Paulo - SP<br>CEP: 01234-567</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item overflow-hidden">
+                            <div class="transform translate-y-full opacity-0 flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-accent text-dark rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Telefone</h3>
+                                    <p class="text-gray-300">(11) 99999-9999</p>
+                                    <a href="https://wa.me/5511999999999" class="text-accent hover:text-white transition-colors duration-300">WhatsApp</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item overflow-hidden">
+                            <div class="transform translate-y-full opacity-0 flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-accent text-dark rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10h5v-2h-5c-4.34 0-8-3.66-8-8s3.66-8 8-8 8 3.66 8 8v1.43c0 .79-.71 1.57-1.5 1.57s-1.5-.78-1.5-1.57V12c0-2.76-2.24-5-5-5s-5 2.24-5 5 2.24 5 5 5c1.38 0 2.64-.56 3.54-1.47.65.89 1.77 1.47 2.96 1.47 1.97 0 3.5-1.53 3.5-3.57V12c0-5.52-4.48-10-10-10zm0 13c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Email</h3>
+                                    <p class="text-gray-300">contato@galvaorv.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item overflow-hidden">
+                            <div class="transform translate-y-full opacity-0 flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-accent text-dark rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+                                        <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Horário</h3>
+                                    <p class="text-gray-300">Segunda a Sexta: 9h às 18h<br>Sábado: 9h às 16h<br>Domingo: Fechado</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Formulário de contato -->
+                <div class="contact-form-container overflow-hidden">
+                    <div class="transform translate-y-full opacity-0">
+                        <form class="contact-form space-y-6" id="contact-form">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="name" class="block text-sm font-semibold mb-2">Nome</label>
+                                    <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-accent focus:outline-none transition-colors duration-300">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-semibold mb-2">Email</label>
+                                    <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-accent focus:outline-none transition-colors duration-300">
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="phone" class="block text-sm font-semibold mb-2">Telefone</label>
+                                    <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-accent focus:outline-none transition-colors duration-300">
+                                </div>
+                                <div>
+                                    <label for="style" class="block text-sm font-semibold mb-2">Estilo Desejado</label>
+                                    <select id="style" name="style" class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-accent focus:outline-none transition-colors duration-300">
+                                        <option value="">Selecione um estilo</option>
+                                        <option value="realismo">Realismo</option>
+                                        <option value="blackwork">Blackwork</option>
+                                        <option value="geometrico">Geométrico</option>
+                                        <option value="art-nouveau">Art Nouveau</option>
+                                        <option value="outro">Outro</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-sm font-semibold mb-2">Mensagem</label>
+                                <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-accent focus:outline-none transition-colors duration-300 resize-none" placeholder="Conte-nos sobre sua ideia de tatuagem..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full px-8 py-4 bg-accent text-dark font-bold uppercase tracking-wider hover:bg-white transition-colors duration-300">
+                                Enviar Mensagem
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="py-12 bg-dark border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <span class="text-2xl font-bold text-accent">GALVÃO</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Transformando ideias em arte permanente com técnicas avançadas e design exclusivo.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://instagram.com/galvaorv" target="_blank" class="text-gray-400 hover:text-accent transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="https://wa.me/5511999999999" target="_blank" class="text-gray-400 hover:text-accent transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Links Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-accent transition-colors duration-300">Início</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-accent transition-colors duration-300">Sobre</a></li>
+                        <li><a href="#work" class="text-gray-400 hover:text-accent transition-colors duration-300">Trabalhos</a></li>
+                        <li><a href="#process" class="text-gray-400 hover:text-accent transition-colors duration-300">Processo</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-accent transition-colors duration-300">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contato</h3>
+                    <div class="space-y-2 text-gray-400">
+                        <p>Rua das Artes, 123</p>
+                        <p>Centro, São Paulo - SP</p>
+                        <p>(11) 99999-9999</p>
+                        <p>contato@galvaorv.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2024 Galvão. Todos os direitos reservados.</p>
+            </div>
+        </div>
+        <!-- JavaScript personalizado -->
+    <script src="js/main.js"></script>
+</body>
+</html>
+
