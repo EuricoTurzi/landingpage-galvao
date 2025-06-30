@@ -1,5 +1,148 @@
 // JavaScript principal para Galvão RV - Versão Melhorada
 
+// Estado do portfólio expandível
+let isPortfolioExpanded = false;
+let currentPortfolioFilter = 'todos';
+
+// Inicializar portfólio expandível
+function initExpandablePortfolio() {
+    const showMoreBtn = document.getElementById('show-more-btn');
+    const showLessBtn = document.getElementById('show-less-btn');
+    const showLessContainer = document.getElementById('show-less-container');
+    const portfolioOverlay = document.getElementById('portfolio-overlay');
+    
+    if (!showMoreBtn || !showLessBtn) return;
+    
+    // Event listeners
+    showMoreBtn.addEventListener('click', showMoreWorks);
+    showLessBtn.addEventListener('click', showLessWorks);
+    
+    // Atualizar filtros para trabalhar com sistema expandível
+    updateWorkFilter();
+}
+
+// Função para mostrar mais trabalhos
+function showMoreWorks() {
+    const hiddenItems = document.querySelectorAll('.work-item.hidden');
+    const portfolioOverlay = document.getElementById('portfolio-overlay');
+    const showLessContainer = document.getElementById('show-less-container');
+    
+    hiddenItems.forEach((item, index) => {
+        setTimeout(() => {
+            item.classList.remove('hidden');
+            item.classList.add('fade-in');
+        }, index * 100);
+    });
+    
+    // Esconder overlay e mostrar botão "Ver Menos"
+    portfolioOverlay.style.display = 'none';
+    showLessContainer.classList.remove('hidden');
+    isPortfolioExpanded = true;
+    
+    // Scroll suave para mostrar novos itens
+    setTimeout(() => {
+        const firstNewItem = hiddenItems[0];
+        if (firstNewItem) {
+            firstNewItem.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+            });
+        }
+    }, 500);
+}
+
+// Função para mostrar menos trabalhos
+function showLessWorks() {
+    const allItems = document.querySelectorAll('.work-item');
+    const itemsToHide = Array.from(allItems).slice(3); // Todos exceto os primeiros 3
+    const portfolioOverlay = document.getElementById('portfolio-overlay');
+    const showLessContainer = document.getElementById('show-less-container');
+    
+    itemsToHide.forEach((item, index) => {
+        setTimeout(() => {
+            item.classList.add('hidden');
+            item.classList.remove('fade-in');
+        }, index * 50);
+    });
+    
+    // Mostrar overlay e esconder botão "Ver Menos"
+    setTimeout(() => {
+        portfolioOverlay.style.display = 'flex';
+        showLessContainer.classList.add('hidden');
+        isPortfolioExpanded = false;
+        
+        // Scroll de volta para o topo da seção
+        document.querySelector('.work-grid').scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+        });
+    }, 300);
+}
+
+// Atualizar sistema de filtros para trabalhar com expansão
+function updateWorkFilter() {
+    const filterButtons = document.querySelectorAll('.work-filter-btn');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Atualizar botão ativo
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            
+            // Aplicar filtro
+            const category = button.textContent.toLowerCase().trim();
+            currentPortfolioFilter = category;
+            filterPortfolioWorks(category);
+            
+            // Reset do estado expandido quando mudar filtro
+            if (isPortfolioExpanded) {
+                const showLessContainer = document.getElementById('show-less-container');
+                const portfolioOverlay = document.getElementById('portfolio-overlay');
+                
+                isPortfolioExpanded = false;
+                showLessContainer.classList.add('hidden');
+                portfolioOverlay.style.display = 'flex';
+            }
+        });
+    });
+}
+
+// Função para filtrar trabalhos com sistema expandível
+function filterPortfolioWorks(category) {
+    const allItems = document.querySelectorAll('.work-item');
+    const portfolioOverlay = document.getElementById('portfolio-overlay');
+    let visibleCount = 0;
+    
+    allItems.forEach((item, index) => {
+        const itemCategory = item.getAttribute('data-category');
+        const shouldShow = category === 'todos' || itemCategory === category;
+        
+        if (shouldShow) {
+            if (!isPortfolioExpanded && visibleCount >= 3) {
+                item.classList.add('hidden');
+            } else {
+                item.classList.remove('hidden');
+                item.style.opacity = '1';
+            }
+            visibleCount++;
+        } else {
+            item.classList.add('hidden');
+            item.style.opacity = '0.3';
+        }
+    });
+    
+    // Mostrar/esconder overlay baseado no filtro e estado
+    const totalInCategory = document.querySelectorAll(
+        category === 'todos' ? '.work-item' : `.work-item[data-category="${category}"]`
+    ).length;
+    
+    if (!isPortfolioExpanded && totalInCategory > 3) {
+        portfolioOverlay.style.display = 'flex';
+    } else {
+        portfolioOverlay.style.display = 'none';
+    }
+}
+
 // Configurações globais
 const CONFIG = {
     animationDuration: 1,
@@ -40,6 +183,7 @@ function initializeApp() {
         initContactForm();
         initProgressBar();
         initScrollEffects();
+        initExpandablePortfolio();
         
         console.log('Aplicação inicializada com sucesso');
     } catch (error) {
@@ -359,14 +503,14 @@ function animateAboutSection() {
     if (typeof gsap === 'undefined') return;
     
     const elements = [
-        '.section-header .transform',
-        '.about-paragraph .block',
-        '.about-signature .transform',
-        '.about-stats .transform'
+        '#about .section-header .transform',
+        '#about .about-paragraph .block',
+        '#about .about-specialties .transform',
+        '#about .about-signature .transform'
     ];
     
     elements.forEach((selector, index) => {
-        const element = document.querySelector(`#about ${selector}`);
+        const element = document.querySelector(selector);
         if (element) {
             gsap.to(element, {
                 scrollTrigger: {
@@ -380,6 +524,19 @@ function animateAboutSection() {
                 ease: "power3.out"
             });
         }
+    });
+    
+    // ADICIONE ESTA PARTE PARA AS ESTATÍSTICAS:
+    gsap.to('#about .about-stats .transform', {
+        scrollTrigger: {
+            trigger: '#about .about-stats',
+            start: 'top 80%'
+        },
+        y: 0,
+        opacity: 1,
+        duration: CONFIG.animationDuration,
+        stagger: 0.1,
+        ease: "power3.out"
     });
 }
 
@@ -468,6 +625,18 @@ function handleFilterClick(clickedButton, allButtons, workItems) {
 // Animar seção Processo
 function animateProcessSection() {
     if (typeof gsap === 'undefined') return;
+
+    // Animar título da seção
+    gsap.to('#process .section-header .transform', {
+        scrollTrigger: {
+            trigger: '#process',
+            start: 'top 80%'
+        },
+        y: 0,
+        opacity: 1,
+        duration: CONFIG.animationDuration,
+        ease: "power3.out"
+    });
     
     document.querySelectorAll('.process-step').forEach((step, index) => {
         const content = step.querySelector('.process-step-content .transform');
@@ -523,28 +692,37 @@ function animateProcessSection() {
 function animateTestimonialsSection() {
     if (typeof gsap === 'undefined') return;
     
-    gsap.to('.testimonial-slider .section-header .transform', {
-        scrollTrigger: {
-            trigger: '.testimonial-slider',
-            start: 'top 80%'
-        },
-        y: 0,
-        opacity: 1,
-        duration: CONFIG.animationDuration,
-        ease: "power3.out"
-    });
+    // Encontrar a seção de depoimentos (a que contém .testimonial-slider)
+    const testimonialSection = document.querySelector('.testimonial-slider').closest('section');
     
-    gsap.fromTo('.testimonial-slide', 
+    // Animar título da seção
+    if (testimonialSection) {
+        const headerTransform = testimonialSection.querySelector('.section-header .transform');
+        if (headerTransform) {
+            gsap.to(headerTransform, {
+                scrollTrigger: {
+                    trigger: testimonialSection,
+                    start: 'top 80%'
+                },
+                y: 0,
+                opacity: 1,
+                duration: CONFIG.animationDuration,
+                ease: "power3.out"
+            });
+        }
+    }
+    
+    // Animar o container do slider
+    gsap.fromTo('.testimonial-slider', 
         { opacity: 0, y: 50 },
         {
             scrollTrigger: {
-                trigger: '.testimonial-track',
+                trigger: '.testimonial-slider',
                 start: 'top 80%'
             },
             opacity: 1,
             y: 0,
             duration: CONFIG.animationDuration,
-            stagger: 0.3,
             ease: "power3.out"
         }
     );
@@ -552,27 +730,93 @@ function animateTestimonialsSection() {
 
 // Inicializar slider de depoimentos
 function initTestimonialSlider() {
-    const slides = document.querySelectorAll('.testimonial-slide');
+    const pages = document.querySelectorAll('.testimonial-page');
     const dots = document.querySelectorAll('.testimonial-dot');
+    const track = document.querySelector('.testimonial-track');
+    const prevBtn = document.querySelector('.testimonial-prev');
+    const nextBtn = document.querySelector('.testimonial-next');
     
-    if (slides.length === 0 || dots.length === 0) return;
+    if (pages.length === 0 || dots.length === 0 || !track) return;
+    
+    let totalPages = pages.length; // Agora são 3 páginas
+    let autoPlayInterval;
     
     // Configurar dots
     dots.forEach((dot, index) => {
         dot.addEventListener('click', () => goToTestimonial(index));
     });
     
-    // Auto-play (opcional)
-    setInterval(() => {
-        APP_STATE.currentTestimonial = (APP_STATE.currentTestimonial + 1) % slides.length;
-        updateTestimonialDots();
-    }, 5000);
+    // Configurar setas
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            APP_STATE.currentTestimonial = APP_STATE.currentTestimonial === 0 
+                ? totalPages - 1 
+                : APP_STATE.currentTestimonial - 1;
+            updateTestimonialSlider();
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            APP_STATE.currentTestimonial = (APP_STATE.currentTestimonial + 1) % totalPages;
+            updateTestimonialSlider();
+        });
+    }
+    
+    // Auto-play
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(() => {
+            APP_STATE.currentTestimonial = (APP_STATE.currentTestimonial + 1) % totalPages;
+            updateTestimonialSlider();
+        }, 7000); // Aumentado para 7 segundos por ter mais conteúdo
+    }
+    
+    function stopAutoPlay() {
+        if (autoPlayInterval) {
+            clearInterval(autoPlayInterval);
+        }
+    }
+    
+    // Parar auto-play ao hover
+    const slider = document.querySelector('.testimonial-slider');
+    if (slider) {
+        slider.addEventListener('mouseenter', stopAutoPlay);
+        slider.addEventListener('mouseleave', startAutoPlay);
+    }
+    
+    // Iniciar auto-play
+    startAutoPlay();
+    
+    // Atualizar slider inicial
+    updateTestimonialSlider();
 }
 
 // Ir para depoimento específico
 function goToTestimonial(index) {
     APP_STATE.currentTestimonial = index;
-    updateTestimonialDots();
+    updateTestimonialSlider();
+}
+
+// Atualizar slider de depoimentos
+function updateTestimonialSlider() {
+    const track = document.querySelector('.testimonial-track');
+    const dots = document.querySelectorAll('.testimonial-dot');
+    
+    if (track) {
+        const translateX = -APP_STATE.currentTestimonial * 100;
+        track.style.transform = `translateX(${translateX}%)`;
+    }
+    
+    // Atualizar dots
+    dots.forEach((dot, index) => {
+        if (index === APP_STATE.currentTestimonial) {
+            dot.classList.add('active');
+            dot.style.backgroundColor = '#FFB800';
+        } else {
+            dot.classList.remove('active');
+            dot.style.backgroundColor = '#6b7280';
+        }
+    });
 }
 
 // Atualizar dots dos depoimentos
@@ -631,9 +875,10 @@ function animateContactSection() {
 function animateFAQSection() {
     if (typeof gsap === 'undefined') return;
     
-    gsap.to('.faq-list .section-header .transform', {
+    // Animar título da seção FAQ
+    gsap.to('#faq .section-header .transform', {
         scrollTrigger: {
-            trigger: '.faq-list',
+            trigger: '#faq',
             start: 'top 80%'
         },
         y: 0,

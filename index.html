@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galvão | Estúdio de Tatuagem</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
     <meta name="description" content="Estúdio de tatuagem Galvão - Transformando ideias em arte permanente. Especialista em blackwork, anime e tatuagens personalizadas.">
     
     <!-- Tailwind CSS -->
@@ -317,35 +321,41 @@
         </div>
     </section>
     <!-- Seção Trabalhos -->
-    <section id="work" class="py-20 md:py-32 bg-gray-900 relative overflow-hidden">
-        <div class="noise-overlay absolute inset-0 opacity-10 mix-blend-overlay"></div>
+    <!-- Seção Trabalhos COMPLETA -->
+<section id="work" class="py-20 md:py-32 bg-gray-900 relative overflow-hidden">
+    <div class="noise-overlay absolute inset-0 opacity-10 mix-blend-overlay"></div>
+    
+    <!-- Gradientes sutis para quebrar o preto -->
+    <div class="absolute inset-0 bg-gradient-to-tl from-gray-800/40 via-transparent to-gray-700/20"></div>
+    <div class="absolute bottom-0 right-0 w-2/3 h-1/2 bg-gradient-to-tl from-accent/4 via-transparent to-transparent"></div>
+    
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="section-header text-center mb-16 overflow-hidden">
+            <div class="transform translate-y-full opacity-0">
+                <span class="inline-block text-accent uppercase tracking-widest text-sm font-semibold mb-4">Portfólio</span>
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter leading-tight font-serif mb-6">Nossos Trabalhos</h2>
+                <p class="text-gray-300 max-w-2xl mx-auto">Cada tatuagem é uma obra de arte única, criada com paixão e dedicação para contar sua história.</p>
+            </div>
+        </div>
         
-        <!-- Gradientes sutis para quebrar o preto -->
-        <div class="absolute inset-0 bg-gradient-to-tl from-gray-800/40 via-transparent to-gray-700/20"></div>
-        <div class="absolute bottom-0 right-0 w-2/3 h-1/2 bg-gradient-to-tl from-accent/4 via-transparent to-transparent"></div>
-        
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="section-header text-center mb-16 overflow-hidden">
-                <div class="transform translate-y-full opacity-0">
-                    <span class="inline-block text-accent uppercase tracking-widest text-sm font-semibold mb-4">Portfólio</span>
-                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter leading-tight font-serif mb-6">Nossos Trabalhos</h2>
-                    <p class="text-gray-300 max-w-2xl mx-auto">Cada tatuagem é uma obra de arte única, criada com paixão e dedicação para contar sua história.</p>
+        <div class="work-filter-container text-center mb-12 overflow-hidden">
+            <div class="transform translate-y-full opacity-0">
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button class="work-filter-btn active px-6 py-3 border border-gray-600 hover:border-accent hover:text-accent transition-all duration-300 uppercase tracking-wider text-sm font-semibold">Todos</button>
+                    <button class="work-filter-btn px-6 py-3 border border-gray-600 hover:border-accent hover:text-accent transition-all duration-300 uppercase tracking-wider text-sm font-semibold">Anime</button>
+                    <button class="work-filter-btn px-6 py-3 border border-gray-600 hover:border-accent hover:text-accent transition-all duration-300 uppercase tracking-wider text-sm font-semibold">Blackwork</button>
+                    <button class="work-filter-btn px-6 py-3 border border-gray-600 hover:border-accent hover:text-accent transition-all duration-300 uppercase tracking-wider text-sm font-semibold">Realismo</button>
+                    <button class="work-filter-btn px-6 py-3 border border-gray-600 hover:border-accent hover:text-accent transition-all duration-300 uppercase tracking-wider text-sm font-semibold">Diversos</button>
                 </div>
             </div>
-            
-            <div class="work-filter-container text-center mb-12 overflow-hidden">
-                <div class="transform translate-y-full opacity-0">
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <button class="work-filter-btn active px-6 py-3 border border-gray-600 hover:border-accent hover:text-accent transition-all duration-300 uppercase tracking-wider text-sm font-semibold">Todos</button>
-                        <button class="work-filter-btn px-6 py-3 border border-gray-600 hover:border-accent hover:text-accent transition-all duration-300 uppercase tracking-wider text-sm font-semibold">Anime</button>
-                        <button class="work-filter-btn px-6 py-3 border border-gray-600 hover:border-accent hover:text-accent transition-all duration-300 uppercase tracking-wider text-sm font-semibold">Blackwork</button>
-                        <button class="work-filter-btn px-6 py-3 border border-gray-600 hover:border-accent hover:text-accent transition-all duration-300 uppercase tracking-wider text-sm font-semibold">Realismo</button>
-                        <button class="work-filter-btn px-6 py-3 border border-gray-600 hover:border-accent hover:text-accent transition-all duration-300 uppercase tracking-wider text-sm font-semibold">Diversos</button>
-                    </div>
-                </div>
-            </div>
-            
+        </div>
+        
+        <!-- Container do portfólio com efeito fade -->
+        <div class="portfolio-container relative">
             <div class="work-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- PRIMEIROS 3 ITENS - SEMPRE VISÍVEIS -->
+                
                 <!-- Item 1 - Blackwork -->
                 <div class="work-item group cursor-pointer" data-category="blackwork">
                     <div class="overflow-hidden transform translate-y-full opacity-0">
@@ -388,8 +398,10 @@
                     </div>
                 </div>
                 
+                <!-- PRÓXIMOS 9 ITENS - INICIALMENTE OCULTOS -->
+                
                 <!-- Item 4 - Blackwork 2 -->
-                <div class="work-item group cursor-pointer" data-category="blackwork">
+                <div class="work-item group cursor-pointer hidden" data-category="blackwork">
                     <div class="overflow-hidden transform translate-y-full opacity-0">
                         <div class="aspect-square bg-gray-800 relative overflow-hidden rounded-lg">
                             <img src="images/blackwork_2.jpg" alt="Blackwork Geometric" class="w-full h-full object-cover">
@@ -403,7 +415,7 @@
                 </div>
                 
                 <!-- Item 5 - Anime 2 -->
-                <div class="work-item group cursor-pointer" data-category="anime">
+                <div class="work-item group cursor-pointer hidden" data-category="anime">
                     <div class="overflow-hidden transform translate-y-full opacity-0">
                         <div class="aspect-square bg-gray-800 relative overflow-hidden rounded-lg">
                             <img src="images/anime_2.jpg" alt="Anime Character Tattoo" class="w-full h-full object-cover">
@@ -417,7 +429,7 @@
                 </div>
                 
                 <!-- Item 6 - Geométrico -->
-                <div class="work-item group cursor-pointer" data-category="diversos">
+                <div class="work-item group cursor-pointer hidden" data-category="diversos">
                     <div class="overflow-hidden transform translate-y-full opacity-0">
                         <div class="aspect-square bg-gray-800 relative overflow-hidden rounded-lg">
                             <img src="images/geometrico_1.jpg" alt="Geometric Tattoo" class="w-full h-full object-cover">
@@ -431,7 +443,7 @@
                 </div>
                 
                 <!-- Item 7 - Blackwork 3 -->
-                <div class="work-item group cursor-pointer" data-category="blackwork">
+                <div class="work-item group cursor-pointer hidden" data-category="blackwork">
                     <div class="overflow-hidden transform translate-y-full opacity-0">
                         <div class="aspect-square bg-gray-800 relative overflow-hidden rounded-lg">
                             <img src="images/blackwork_3.jpg" alt="Bold Blackwork" class="w-full h-full object-cover">
@@ -445,7 +457,7 @@
                 </div>
                 
                 <!-- Item 8 - Realismo 2 -->
-                <div class="work-item group cursor-pointer" data-category="realismo">
+                <div class="work-item group cursor-pointer hidden" data-category="realismo">
                     <div class="overflow-hidden transform translate-y-full opacity-0">
                         <div class="aspect-square bg-gray-800 relative overflow-hidden rounded-lg">
                             <img src="images/realismo_2.jpg" alt="Realistic Fighter Tattoo" class="w-full h-full object-cover">
@@ -459,7 +471,7 @@
                 </div>
                 
                 <!-- Item 9 - Anime 3 -->
-                <div class="work-item group cursor-pointer" data-category="anime">
+                <div class="work-item group cursor-pointer hidden" data-category="anime">
                     <div class="overflow-hidden transform translate-y-full opacity-0">
                         <div class="aspect-square bg-gray-800 relative overflow-hidden rounded-lg">
                             <img src="images/anime_3.jpg" alt="Anime Sleeve" class="w-full h-full object-cover">
@@ -473,7 +485,7 @@
                 </div>
                 
                 <!-- Item 10 - Geométrico 2 -->
-                <div class="work-item group cursor-pointer" data-category="diversos">
+                <div class="work-item group cursor-pointer hidden" data-category="diversos">
                     <div class="overflow-hidden transform translate-y-full opacity-0">
                         <div class="aspect-square bg-gray-800 relative overflow-hidden rounded-lg">
                             <img src="images/geometrico_2.jpg" alt="Geometric Sleeve" class="w-full h-full object-cover">
@@ -487,7 +499,7 @@
                 </div>
                 
                 <!-- Item 11 - Realismo 3 -->
-                <div class="work-item group cursor-pointer" data-category="realismo">
+                <div class="work-item group cursor-pointer hidden" data-category="realismo">
                     <div class="overflow-hidden transform translate-y-full opacity-0">
                         <div class="aspect-square bg-gray-800 relative overflow-hidden rounded-lg">
                             <img src="images/realismo_3.jpg" alt="Realistic Portrait" class="w-full h-full object-cover">
@@ -501,7 +513,7 @@
                 </div>
                 
                 <!-- Item 12 - Geométrico 3 -->
-                <div class="work-item group cursor-pointer" data-category="diversos">
+                <div class="work-item group cursor-pointer hidden" data-category="diversos">
                     <div class="overflow-hidden transform translate-y-full opacity-0">
                         <div class="aspect-square bg-gray-800 relative overflow-hidden rounded-lg">
                             <img src="images/geometrico_3.jpg" alt="Modern Geometric" class="w-full h-full object-cover">
@@ -513,17 +525,35 @@
                         </div>
                     </div>
                 </div>
+                
             </div>
             
-            <div class="work-more-btn text-center mt-16 overflow-hidden">
-                <div class="transform translate-y-full opacity-0">
-                    <a href="#contact" class="inline-block px-8 py-4 border-2 border-accent text-accent hover:bg-accent hover:text-dark transition-all duration-300 uppercase tracking-wider text-sm font-bold">
+            <!-- Overlay com fade e botão "Ver Mais" -->
+            <div id="portfolio-overlay" class="absolute inset-x-0 bottom-0 h-32 fade-overlay flex items-end justify-center pb-6">
+                <button id="show-more-btn" class="btn-expand px-8 py-4 text-dark font-bold uppercase tracking-wider text-sm rounded-lg">
+                    <span class="flex items-center gap-2">
                         Ver Mais Trabalhos
-                    </a>
-                </div>
+                        <svg class="w-4 h-4 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z"/>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+            
+            <!-- Botão "Ver Menos" (inicialmente oculto) -->
+            <div id="show-less-container" class="text-center mt-8 hidden">
+                <button id="show-less-btn" class="px-8 py-4 border-2 border-accent text-accent hover:bg-accent hover:text-dark transition-all duration-300 uppercase tracking-wider text-sm font-bold rounded-lg">
+                    <span class="flex items-center gap-2 justify-center">
+                        Ver Menos
+                        <svg class="w-4 h-4 transition-transform duration-300 rotate-180" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z"/>
+                        </svg>
+                    </span>
+                </button>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Seção Processo -->
     <section id="process" class="py-20 md:py-32 bg-dark relative overflow-hidden">
@@ -606,7 +636,7 @@
                         <div class="overflow-hidden">
                             <div class="transform translate-y-full opacity-0">
                                 <div class="relative h-80 bg-gray-800 rounded-lg overflow-hidden">
-                                    <img src="images/processo_design.jpg" alt="Criação de Design" class="w-full h-full object-cover">
+                                    <img src="images/processo_design.png" alt="Criação de Design" class="w-full h-full object-cover">
                                     <div class="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-transparent"></div>
                                 </div>
                             </div>
@@ -691,14 +721,6 @@
     <section class="py-20 md:py-32 bg-gray-900 relative">
         <div class="noise-overlay absolute inset-0 opacity-10 mix-blend-overlay"></div>
         
-        <!-- Elementos decorativos -->
-        <div class="absolute top-10 left-10 w-20 h-20 opacity-20">
-            <img src="images/tattoo_machine_sticker.jpg" alt="Tattoo Machine" class="w-full h-full object-contain filter invert">
-        </div>
-        <div class="absolute bottom-10 right-10 w-16 h-16 opacity-15">
-            <img src="images/tattoo_equipment_sticker.jpg" alt="Tattoo Equipment" class="w-full h-full object-contain filter invert">
-        </div>
-        
         <div class="container mx-auto px-6">
             <div class="section-header text-center mb-16 overflow-hidden">
                 <div class="transform translate-y-full opacity-0">
@@ -708,96 +730,252 @@
                 </div>
             </div>
             
-            <div class="testimonial-slider relative">
-                <div class="testimonial-track flex gap-8 overflow-hidden">
-                    <!-- Depoimento 1 -->
-                    <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3">
-                        <div class="testimonial-content bg-gray-800 p-8 rounded-lg h-full">
-                            <div class="mb-6">
-                                <svg class="w-8 h-8 text-accent mb-4" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
-                                </svg>
-                                <p class="text-gray-300 leading-relaxed">
-                                    "Experiência incrível! O Galvão é um verdadeiro artista. Minha tatuagem ficou exatamente como eu imaginava, com detalhes perfeitos."
-                                </p>
-                            </div>
-                            <div class="testimonial-author flex items-center">
-                                <div class="w-12 h-12 bg-gray-700 rounded-full mr-4 flex items-center justify-center">
-                                    <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            <div class="testimonial-slider relative max-w-6xl mx-auto">
+                <div class="testimonial-wrapper overflow-hidden">
+                    <div class="testimonial-track flex transition-transform duration-500 ease-in-out">
+                        <!-- Página 1 - 3 depoimentos -->
+                        <div class="testimonial-page flex-shrink-0 w-full grid grid-cols-1 md:grid-cols-3 gap-6 px-4">
+                            <!-- Depoimento 1 -->
+                            <div class="testimonial-content bg-gray-800 p-6 rounded-lg">
+                                <div class="mb-6">
+                                    <svg class="w-8 h-8 text-accent mb-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
                                     </svg>
+                                    <p class="text-gray-300 leading-relaxed text-sm">
+                                        "Experiência incrível! O Galvão é um verdadeiro artista. Minha tatuagem ficou exatamente como eu imaginava, com detalhes perfeitos."
+                                    </p>
                                 </div>
-                                <div>
-                                    <h4 class="font-semibold">Maria Silva</h4>
-                                    <p class="text-sm text-gray-400">Cliente desde 2023</p>
+                                <div class="testimonial-author flex items-center">
+                                    <div class="w-10 h-10 bg-gray-700 rounded-full mr-3 flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-sm">Maria Silva</h4>
+                                        <p class="text-xs text-gray-400">Cliente desde 2023</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Depoimento 2 -->
+                            <div class="testimonial-content bg-gray-800 p-6 rounded-lg">
+                                <div class="mb-6">
+                                    <svg class="w-8 h-8 text-accent mb-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+                                    </svg>
+                                    <p class="text-gray-300 leading-relaxed text-sm">
+                                        "Profissionalismo exemplar! Ambiente limpo, equipamentos modernos e um atendimento excepcional. Recomendo de olhos fechados!"
+                                    </p>
+                                </div>
+                                <div class="testimonial-author flex items-center">
+                                    <div class="w-10 h-10 bg-gray-700 rounded-full mr-3 flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-sm">João Santos</h4>
+                                        <p class="text-xs text-gray-400">Cliente desde 2021</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Depoimento 3 -->
+                            <div class="testimonial-content bg-gray-800 p-6 rounded-lg">
+                                <div class="mb-6">
+                                    <svg class="w-8 h-8 text-accent mb-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+                                    </svg>
+                                    <p class="text-gray-300 leading-relaxed text-sm">
+                                        "Já fiz várias tatuagens, mas nunca tive uma experiência tão boa. O cuidado com cada detalhe é impressionante!"
+                                    </p>
+                                </div>
+                                <div class="testimonial-author flex items-center">
+                                    <div class="w-10 h-10 bg-gray-700 rounded-full mr-3 flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-sm">Ana Costa</h4>
+                                        <p class="text-xs text-gray-400">Cliente desde 2023</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Depoimento 2 -->
-                    <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3">
-                        <div class="testimonial-content bg-gray-800 p-8 rounded-lg h-full">
-                            <div class="mb-6">
-                                <svg class="w-8 h-8 text-accent mb-4" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
-                                </svg>
-                                <p class="text-gray-300 leading-relaxed">
-                                    "Profissionalismo exemplar! Ambiente limpo, equipamentos modernos e um atendimento excepcional. Recomendo de olhos fechados!"
-                                </p>
-                            </div>
-                            <div class="testimonial-author flex items-center">
-                                <div class="w-12 h-12 bg-gray-700 rounded-full mr-4 flex items-center justify-center">
-                                    <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+
+                        <!-- Página 2 - 3 depoimentos -->
+                        <div class="testimonial-page flex-shrink-0 w-full grid grid-cols-1 md:grid-cols-3 gap-6 px-4">
+                            <!-- Depoimento 4 -->
+                            <div class="testimonial-content bg-gray-800 p-6 rounded-lg">
+                                <div class="mb-6">
+                                    <svg class="w-8 h-8 text-accent mb-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
                                     </svg>
+                                    <p class="text-gray-300 leading-relaxed text-sm">
+                                        "Minha primeira tatuagem e não poderia ter escolhido melhor! Galvão me deixou super à vontade e o resultado foi perfeito."
+                                    </p>
                                 </div>
-                                <div>
-                                    <h4 class="font-semibold">João Santos</h4>
-                                    <p class="text-sm text-gray-400">Cliente desde 2021</p>
+                                <div class="testimonial-author flex items-center">
+                                    <div class="w-10 h-10 bg-gray-700 rounded-full mr-3 flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-sm">Lucas Oliveira</h4>
+                                        <p class="text-xs text-gray-400">Cliente desde 2024</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Depoimento 5 -->
+                            <div class="testimonial-content bg-gray-800 p-6 rounded-lg">
+                                <div class="mb-6">
+                                    <svg class="w-8 h-8 text-accent mb-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+                                    </svg>
+                                    <p class="text-gray-300 leading-relaxed text-sm">
+                                        "Arte pura! Cada traço é pensado com cuidado. Minha sleeve ficou sensacional, recebo elogios todos os dias."
+                                    </p>
+                                </div>
+                                <div class="testimonial-author flex items-center">
+                                    <div class="w-10 h-10 bg-gray-700 rounded-full mr-3 flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-sm">Patricia Lima</h4>
+                                        <p class="text-xs text-gray-400">Cliente desde 2022</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Depoimento 6 -->
+                            <div class="testimonial-content bg-gray-800 p-6 rounded-lg">
+                                <div class="mb-6">
+                                    <svg class="w-8 h-8 text-accent mb-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+                                    </svg>
+                                    <p class="text-gray-300 leading-relaxed text-sm">
+                                        "Técnica impecável e criatividade incrível. Transformou minha ideia em algo ainda melhor do que eu imaginava."
+                                    </p>
+                                </div>
+                                <div class="testimonial-author flex items-center">
+                                    <div class="w-10 h-10 bg-gray-700 rounded-full mr-3 flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-sm">Rafael Mendes</h4>
+                                        <p class="text-xs text-gray-400">Cliente desde 2021</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Depoimento 3 -->
-                    <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3">
-                        <div class="testimonial-content bg-gray-800 p-8 rounded-lg h-full">
-                            <div class="mb-6">
-                                <svg class="w-8 h-8 text-accent mb-4" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
-                                </svg>
-                                <p class="text-gray-300 leading-relaxed">
-                                    "Já fiz várias tatuagens, mas nunca tive uma experiência tão boa. O cuidado com cada detalhe é impressionante!"
-                                </p>
-                            </div>
-                            <div class="testimonial-author flex items-center">
-                                <div class="w-12 h-12 bg-gray-700 rounded-full mr-4 flex items-center justify-center">
-                                    <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+
+                        <!-- Página 3 - 3 depoimentos -->
+                        <div class="testimonial-page flex-shrink-0 w-full grid grid-cols-1 md:grid-cols-3 gap-6 px-4">
+                            <!-- Depoimento 7 -->
+                            <div class="testimonial-content bg-gray-800 p-6 rounded-lg">
+                                <div class="mb-6">
+                                    <svg class="w-8 h-8 text-accent mb-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
                                     </svg>
+                                    <p class="text-gray-300 leading-relaxed text-sm">
+                                        "Atendimento personalizado e resultado excepcional. Vale cada centavo investido. Já estou planejando a próxima!"
+                                    </p>
                                 </div>
-                                <div>
-                                    <h4 class="font-semibold">Ana Costa</h4>
-                                    <p class="text-sm text-gray-400">Cliente desde 2023</p>
+                                <div class="testimonial-author flex items-center">
+                                    <div class="w-10 h-10 bg-gray-700 rounded-full mr-3 flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-sm">Fernanda Castro</h4>
+                                        <p class="text-xs text-gray-400">Cliente desde 2023</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Depoimento 8 -->
+                            <div class="testimonial-content bg-gray-800 p-6 rounded-lg">
+                                <div class="mb-6">
+                                    <svg class="w-8 h-8 text-accent mb-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+                                    </svg>
+                                    <p class="text-gray-300 leading-relaxed text-sm">
+                                        "Profissional dedicado e talentoso. Minha tatuagem de anime ficou idêntica ao personagem. Trabalho perfeito!"
+                                    </p>
+                                </div>
+                                <div class="testimonial-author flex items-center">
+                                    <div class="w-10 h-10 bg-gray-700 rounded-full mr-3 flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-sm">Bruno Alves</h4>
+                                        <p class="text-xs text-gray-400">Cliente desde 2022</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Depoimento 9 -->
+                            <div class="testimonial-content bg-gray-800 p-6 rounded-lg">
+                                <div class="mb-6">
+                                    <svg class="w-8 h-8 text-accent mb-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+                                    </svg>
+                                    <p class="text-gray-300 leading-relaxed text-sm">
+                                        "Ambiente acolhedor e higienizado. Me senti segura em todos os momentos. O resultado superou todas as expectativas!"
+                                    </p>
+                                </div>
+                                <div class="testimonial-author flex items-center">
+                                    <div class="w-10 h-10 bg-gray-700 rounded-full mr-3 flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-sm">Camila Rodrigues</h4>
+                                        <p class="text-xs text-gray-400">Cliente desde 2024</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Navegação do slider -->
+                <!-- Navegação do slider - AGORA SÃO 3 DOTS -->
                 <div class="flex justify-center mt-8 space-x-2">
-                    <button class="testimonial-dot w-3 h-3 bg-gray-600 rounded-full transition-colors duration-300 active"></button>
-                    <button class="testimonial-dot w-3 h-3 bg-gray-600 rounded-full transition-colors duration-300"></button>
-                    <button class="testimonial-dot w-3 h-3 bg-gray-600 rounded-full transition-colors duration-300"></button>
+                    <button class="testimonial-dot w-3 h-3 bg-gray-600 rounded-full transition-colors duration-300 active" data-slide="0"></button>
+                    <button class="testimonial-dot w-3 h-3 bg-gray-600 rounded-full transition-colors duration-300" data-slide="1"></button>
+                    <button class="testimonial-dot w-3 h-3 bg-gray-600 rounded-full transition-colors duration-300" data-slide="2"></button>
                 </div>
+
+                <!-- Setas de navegação -->
+                <button class="testimonial-prev absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-800 hover:bg-accent text-white hover:text-dark w-12 h-12 rounded-full transition-all duration-300 z-20">
+                    <svg class="w-6 h-6 mx-auto" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                </button>
+                <button class="testimonial-next absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-800 hover:bg-accent text-white hover:text-dark w-12 h-12 rounded-full transition-all duration-300 z-20">
+                    <svg class="w-6 h-6 mx-auto" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                    </svg>
+                </button>
             </div>
         </div>
     </section>
+    
 
     <!-- Seção FAQ -->
-    <section class="py-20 md:py-32 bg-dark relative overflow-hidden">
+    <section id="faq" class="py-20 md:py-32 bg-dark relative overflow-hidden">
         <div class="noise-overlay absolute inset-0 opacity-10 mix-blend-overlay"></div>
         
         <!-- Gradientes sutis para quebrar o preto -->
@@ -909,13 +1087,13 @@
                 <div class="contact-info">
                     <div class="space-y-8">
                         <div class="contact-item overflow-hidden">
-                            <div class="transform translate-y-full opacity-0 flex items-start space-x-4">
+                            <div class="transform translate-y-full opacity-0 flex items-center space-x-4">
                                 <div class="w-12 h-12 bg-accent text-dark rounded-full flex items-center justify-center flex-shrink-0">
                                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                                     </svg>
                                 </div>
-                                <div>
+                                <div class="flex-1">
                                     <h3 class="text-xl font-semibold mb-2">Endereço</h3>
                                     <p class="text-gray-300">Avenida Varsóvia, 850<br>Vila Metalúrgica, Santo André - SP<br>CEP: 09220-000</p>
                                 </div>
@@ -923,13 +1101,13 @@
                         </div>
                         
                         <div class="contact-item overflow-hidden">
-                            <div class="transform translate-y-full opacity-0 flex items-start space-x-4">
+                            <div class="transform translate-y-full opacity-0 flex items-center space-x-4">
                                 <div class="w-12 h-12 bg-accent text-dark rounded-full flex items-center justify-center flex-shrink-0">
                                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                                     </svg>
                                 </div>
-                                <div>
+                                <div class="flex-1">
                                     <h3 class="text-xl font-semibold mb-2">Telefone</h3>
                                     <p class="text-gray-300">(11) 91747-7315</p>
                                     <a href="https://wa.me/5511917477315" class="text-accent hover:text-white transition-colors duration-300">WhatsApp</a>
@@ -938,13 +1116,13 @@
                         </div>
                         
                         <div class="contact-item overflow-hidden">
-                            <div class="transform translate-y-full opacity-0 flex items-start space-x-4">
+                            <div class="transform translate-y-full opacity-0 flex items-center space-x-4">
                                 <div class="w-12 h-12 bg-accent text-dark rounded-full flex items-center justify-center flex-shrink-0">
                                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10h5v-2h-5c-4.34 0-8-3.66-8-8s3.66-8 8-8 8 3.66 8 8v1.43c0 .79-.71 1.57-1.5 1.57s-1.5-.78-1.5-1.57V12c0-2.76-2.24-5-5-5s-5 2.24-5 5 2.24 5 5 5c1.38 0 2.64-.56 3.54-1.47.65.89 1.77 1.47 2.96 1.47 1.97 0 3.5-1.53 3.5-3.57V12c0-5.52-4.48-10-10-10zm0 13c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/>
                                     </svg>
                                 </div>
-                                <div>
+                                <div class="flex-1">
                                     <h3 class="text-xl font-semibold mb-2">Email</h3>
                                     <p class="text-gray-300">contato@galvaorv.com</p>
                                 </div>
@@ -952,14 +1130,14 @@
                         </div>
                         
                         <div class="contact-item overflow-hidden">
-                            <div class="transform translate-y-full opacity-0 flex items-start space-x-4">
+                            <div class="transform translate-y-full opacity-0 flex items-center space-x-4">
                                 <div class="w-12 h-12 bg-accent text-dark rounded-full flex items-center justify-center flex-shrink-0">
                                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
                                         <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
                                     </svg>
                                 </div>
-                                <div>
+                                <div class="flex-1">
                                     <h3 class="text-xl font-semibold mb-2">Horário</h3>
                                     <p class="text-gray-300">Segunda a Sexta: 9h às 18h<br>Sábado: 9h às 16h<br>Domingo: Fechado</p>
                                 </div>
@@ -995,7 +1173,7 @@
                                         <option value="realismo">Realismo</option>
                                         <option value="blackwork">Blackwork</option>
                                         <option value="geometrico">Geométrico</option>
-                                        <option value="art-nouveau">Anime</option>
+                                        <option value="anime">Anime</option>
                                         <option value="outro">Outro</option>
                                     </select>
                                 </div>
@@ -1067,6 +1245,107 @@
         </div>
         <!-- JavaScript personalizado -->
     <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+    // Inicializar EmailJS com sua Public Key
+    (function(){
+        emailjs.init("SZSHyoZO3rXpGbBUi"); // Substitua pela sua Public Key
+    })();
+
+    // Função atualizada para envio via EmailJS
+    async function sendEmailJS(data) {
+        const serviceID = 'service_wra6bug';    // Ex: 'service_abc123'
+        const templateID = 'template_vzvjoep';  // Ex: 'template_xyz789'
+        
+        const templateParams = {
+            from_name: data.name,
+            from_email: data.email,
+            phone: data.phone || 'Não informado',
+            style: data.style || 'Não especificado',
+            message: data.message,
+            to_name: 'Galvão RV'
+        };
+        
+        return emailjs.send(serviceID, templateID, templateParams);
+    }
+
+    // Função principal de envio do formulário
+    async function handleFormSubmit(e) {
+        e.preventDefault();
+        
+        const form = e.target;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+        
+        // Validar formulário
+        if (!validateForm(form)) {
+            return;
+        }
+        
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        
+        submitButton.textContent = 'Enviando...';
+        submitButton.disabled = true;
+        
+        try {
+            await sendEmailJS(data);
+            showSuccessMessage();
+            form.reset();
+            
+        } catch (error) {
+            console.error('Erro ao enviar:', error);
+            showErrorMessage();
+        } finally {
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+        }
+    }
+
+    // Mensagem de sucesso
+    function showSuccessMessage() {
+        const message = document.createElement('div');
+        message.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300';
+        message.innerHTML = `
+            <div class="flex items-center space-x-2">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>Mensagem enviada com sucesso!</span>
+            </div>
+        `;
+        
+        document.body.appendChild(message);
+        
+        setTimeout(() => message.classList.remove('translate-x-full'), 100);
+        setTimeout(() => {
+            message.classList.add('translate-x-full');
+            setTimeout(() => document.body.removeChild(message), 300);
+        }, 4000);
+    }
+
+    // Mensagem de erro
+    function showErrorMessage() {
+        const message = document.createElement('div');
+        message.className = 'fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300';
+        message.innerHTML = `
+            <div class="flex items-center space-x-2">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                </svg>
+                <span>Erro ao enviar. Tente novamente.</span>
+            </div>
+        `;
+        
+        document.body.appendChild(message);
+        
+        setTimeout(() => message.classList.remove('translate-x-full'), 100);
+        setTimeout(() => {
+            message.classList.add('translate-x-full');
+            setTimeout(() => document.body.removeChild(message), 300);
+        }, 4000);
+    }
+    </script>
 </body>
 </html>
 
